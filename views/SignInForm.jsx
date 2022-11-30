@@ -29,16 +29,6 @@ function SignInForm({ username, name }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="username">E-mail:</label>
-            <input
-              id="username"
-              className="form-control"
-              name="email"
-              type="text"
-              required
-            />
-          </div>
-          <div className="form-group">
             <label htmlFor="password">Пароль:</label>
             <input
               id="password"
@@ -52,7 +42,6 @@ function SignInForm({ username, name }) {
             Войти
           </button>
         </form>
-        {/*<script src="/js/signin.js" />*/}
       </div>
     </Layout>
   );

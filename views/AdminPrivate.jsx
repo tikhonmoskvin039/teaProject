@@ -1,7 +1,6 @@
 const React = require("react");
 const Layout = require("./Layout");
 function PrivateAdmin({ username, allTeas }) {
-  //JS Code
   return (
     <Layout username={username}>
       <div
@@ -17,7 +16,57 @@ function PrivateAdmin({ username, allTeas }) {
         </p>
         <p>
           <a
-            class="btn btn-primary"
+            class="btn btn-light"
+            data-bs-toggle="collapse"
+            href="#collapseExample2"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample2"
+          >
+            Назначить администратором
+          </a>
+        </p>
+        <div class="collapse mb-4" id="collapseExample2">
+          <div
+            class="card card-body"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.7)",
+              borderRadius: "20px",
+            }}
+          >
+            <h5 className="card-title text-dander">
+              Внимание, выбирая пользователя, вы наделяете его правами
+              редактирования и удаления!
+            </h5>
+            <form id="signinForm" class="adminForm" method="POST" action="/">
+              <div className="form-group">
+                <label htmlFor="name">
+                  Введите e-mail авторизованного пользователя:
+                </label>
+                <input
+                  className="admin form-control"
+                  name="email"
+                  type="text"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                data-newAdmin
+                className="btn btn-danger mt-2"
+              >
+                Назначить
+              </button>
+              <p class="target text-danger" style={{ display: "none" }}>
+                <b>Создание администратора прошло успешно!</b>
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <p>
+          <a
+            class="btn btn-light"
             data-bs-toggle="collapse"
             href="#collapseExample"
             role="button"
@@ -100,7 +149,6 @@ function PrivateAdmin({ username, allTeas }) {
             class="card content mb-3"
             style={{
               maxWidth: "100%",
-              backgroundColor: "rgba(255,255,255,0.7)",
               borderRadius: "20px",
             }}
             id={`${tea.id}`}
@@ -110,6 +158,7 @@ function PrivateAdmin({ username, allTeas }) {
                 <img
                   src={`${tea.picture_url}`}
                   class="img-fluid rounded-start"
+                  style={{ width: "400px", height: "400px" }}
                   alt="..."
                 />
               </div>

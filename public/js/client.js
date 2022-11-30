@@ -103,13 +103,14 @@ allUpdateBtns?.forEach((upd) => {
   upd.addEventListener("click", async (e) => {
     e.preventDefault();
     const teaBox = e.target.closest(".card-body");
-    teaBox.insertAdjacentHTML("afterbegin", template);
+    const oldData = teaBox.innerHTML;
+    console.log('teaBox', teaBox)
+    // teaBox.insertAdjacentHTML("afterbegin", template);
+    teaBox.innerHTML = template;
 
     const cancelButton = document?.querySelector("[data-Cancel]");
-    cancelButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      const box = e.target.closest(".card.card-body");
-      box.remove();
+    cancelButton.addEventListener("click", () => {
+       teaBox.innerHTML = oldData;
     });
     const dataSave = document?.querySelector("[data-save]");
     console.log("dataSave", dataSave);
@@ -150,4 +151,36 @@ allUpdateBtns?.forEach((upd) => {
       }
     });
   });
+});
+
+const newAdminBtn = document.querySelector("[data-newAdmin]");
+console.log("newAdminBtn", newAdminBtn);
+
+newAdminBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const adminInput = document.querySelector(".admin");
+  const email = adminInput.value;
+
+  const target = document.querySelector(".target");
+  target.style.display = "block";
+  setTimeout(() => {
+    target.style.display = "none";
+  }, 3000);
+
+  let response;
+  try {
+    response = await fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    });
+    const data = await response.json();
+    if (response.status === 200) window.location.href = "/private/admin";
+  } catch (err) {
+    console.log("err");
+  }
 });
