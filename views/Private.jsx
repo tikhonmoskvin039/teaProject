@@ -28,8 +28,15 @@ function Private({ comments, username = '' }) {
                     <p>{comment["Teas.Comment.text"]}</p>
                     <a
                       href="#"
+                      data-updBtn={index + 1}
+                      class="btn btn-outline-success"
+                    >
+                      Удалить комментарий
+                    </a>
+                    <a
+                      href="#"
                       data-delBtn={index + 1}
-                      class="btn btn-primary btn-sm"
+                      class="btn btn-outline-danger"
                     >
                       Удалить комментарий
                     </a>

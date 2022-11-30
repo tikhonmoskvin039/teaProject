@@ -34,4 +34,19 @@ route.delete('/del', async (req, res) => {
     }
 });
 
+exports.updateTeaCard = async (req, res) => {
+    try {
+      const { comment_id } = req.body;
+      const updateComment = await Tea.findOne({ where: { id: comment_id } });
+      updateComment.text = name;
+      updateTea.picture_url = picture_url;
+      updateTea.info = info;
+      updateTea.placeOfBirth = placeOfBirth;
+      updateTea.coordinates = coordinates;
+      updateTea.save();
+      res.redirect("/private/admin");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 module.exports = route;
