@@ -14,6 +14,7 @@ const FileStore = require("session-file-store")(session);
 
 // импорт роутов
 const indexRoutes = require('./routes/indexRoutes');
+const teasRoutes = require('./routes/teasRoutes');
 const privateRoutes = require('./routes/privateRoutes');
 
 const authRouter = require("./routes/auth.route");
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
 
 //роутеры
 app.use('/', indexRoutes);
+app.use('/teas', teasRoutes);
 app.use('/private', privateRoutes);
 
 app.use("/auth", authRouter);

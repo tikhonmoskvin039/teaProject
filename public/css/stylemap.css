@@ -1,0 +1,11 @@
+.map {
+    width: 1100px;
+    height: 600px;
+    background-color:black;
+}
+[class*="copyrights-pane"] {
+	display: none !important;
+}
+[class*="balloon__close-button"] {
+	opacity:1;
+}
