@@ -6,7 +6,7 @@
 
 exports.isAdmin = (req, res, next) => {
   if (req.session?.user?.isAdmin === true) next();
-  else res.redirect("/");
+  else res.redirect("/private");
 };
 
 exports.isValid = (req, res, next) => {
