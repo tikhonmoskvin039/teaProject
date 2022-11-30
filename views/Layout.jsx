@@ -28,167 +28,182 @@ function Layout({ title, children, username = "" }) {
         ></script>
       </head>
       <body>
-        <a href="/">
-          <img
-            src="http://s1.iconbird.com/ico/2013/12/505/w450h4001385925290Cofee.png"
-            class="card-img-top"
-            alt="..."
-            style={{
-              width: "35px",
-              position: "fixed",
-              right: "5%",
-              zIndex: "100",
-              height: "35px",
-            }}
-          />
-        </a>
-        <nav
-          class="navbar navbar-expand-lg bg-light"
-          style={{ padding: "0 5% 0", height: "auto" }}
-        >
-          <div class="container-fluid">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+        <div class="wrapper">
+          <div class="top">
+            <nav
+              class="navbar navbar-expand-lg"
+              style={{
+                padding: " 2% ",
+                backgroundColor: "rgba(255,255,255,0.7)",
+              }}
             >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                {username ? (
-                  <>
-                    <a
-                      class="nav-link active"
-                      aria-current="page"
-                      href="#"
-                      style={{ cursor: "default" }}
-                    >
-                      Привет, <b>{username}!</b>
-                    </a>
-                    <a
-                      class="nav-link active"
-                      aria-current="page"
-                      href="/private/admin"
-                    >
-                      Личный кабинет
-                    </a>
-                    <a class="nav-link" href="/auth/signout">
-                      Выход
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <a
-                      class="nav-link active"
-                      aria-current="page"
-                      href="/auth/signin"
-                    >
-                      Вход
-                    </a>
-                    <a class="nav-link" href="/auth/signup">
-                      Регистрация
-                    </a>
-                  </>
-                )}
+              <div class="container-fluid d-flex align-content-center">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNavAltMarkup"
+                  aria-controls="navbarNavAltMarkup"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                    {username ? (
+                      <>
+                        <a
+                          class="nav-link active"
+                          aria-current="page"
+                          href="#"
+                          style={{ cursor: "default" }}
+                        >
+                          Привет, <b>{username}!</b>
+                        </a>
+                        <a
+                          class="nav-link active"
+                          aria-current="page"
+                          href="/private/admin"
+                        >
+                          Личный кабинет
+                        </a>
+                        <a class="nav-link text-danger" href="/auth/signout">
+                          <b>Выход</b>
+                        </a>
+                        <a href="/">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/2972/2972000.png"
+                            class="card-img-top"
+                            title="HOME PAGE"
+                            alt="..."
+                            style={{
+                              width: "85px",
+                              position: "absolute",
+                              right: "5%",
+                              top: "1%",
+                              zIndex: "100",
+                              height: "85px",
+                            }}
+                          />
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        <a
+                          class="nav-link active"
+                          aria-current="page"
+                          href="/auth/signin"
+                        >
+                          Вход
+                        </a>
+                        <a class="nav-link" href="/auth/signup">
+                          Регистрация
+                        </a>
+                        <a href="/">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/2972/2972000.png"
+                            class="card-img-top"
+                            title="HOME PAGE"
+                            alt="..."
+                            style={{
+                              width: "85px",
+                              position: "absolute",
+                              right: "5%",
+                              top: "1%",
+                              zIndex: "100",
+                              height: "85px",
+                            }}
+                          />
+                        </a>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
+            </nav>
+            <div className="container pb-4 pt-4">{children}</div>
           </div>
-        </nav>
-        <div className="container pb-4 pt-4">{children}</div>
-        {/* <footer
-          className="d-flex justify-content-between align-items-center"
-          style={{
-            position: "fixed",
-            bottom: "5%",
-            margin: "0 50px 0",
-            width: "92%",
-          }}
-        >
-          {" "}
-          <i class="fa-brands fa-telegram fa-2xl"></i>
-          <p style={{ fontSize: "25px", color: "black" }}>
-            Created by <b>BEARS ©</b>
-          </p>
-          <i class="fa-brands fa-instagram fa-2xl"></i>
-        </footer> */}
-        <footer
-          class="text-center text-white"
-          style={{ backgroundColor: "#f1f1f1" }}
-        >
-          <div class="container pt-4">
-            <section class="mb-4">
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-facebook-f"></i>
-              </a>
-
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-google"></i>
-              </a>
-
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-linkedin"></i>
-              </a>
-
-              <a
-                class="btn btn-link btn-floating btn-lg text-dark m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-              >
-                <i class="fab fa-github"></i>
-              </a>
-            </section>
-          </div>
-
-          <div
-            class="text-center text-dark p-3"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          <footer
+            class="text-center text-white"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.7)",
+            }}
           >
-            <b> © 2022 created by BEARS</b>
-            <a class="text-dark" href="https://elbrusboot.camp/">
-              {" "}
-              Elbrus Bootcamp
-            </a>
-          </div>
-        </footer>
+            <div class="container">
+              <section>
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-google"></i>
+                </a>
+
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-linkedin"></i>
+                </a>
+
+                <a
+                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+              </section>
+            </div>
+
+            <div
+              class="text-center text-dark p-3"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+            >
+              <b> © 2022 created by BEARS</b>
+              <a
+                class="text-dark"
+                href="https://elbrusboot.camp/"
+                style={{ textDecoration: "none" }}
+              >
+                {" "}
+                Elbrus Bootcamp
+              </a>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );

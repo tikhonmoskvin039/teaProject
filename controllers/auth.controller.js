@@ -10,18 +10,29 @@ const SignUpForm = require("../views/SignUpForm");
 exports.checkAdminAndCreateSession = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const admin = await User.findOne({ where: { isAdmin: true } });
+    // const { name, password } = req.body;
+    // const admin = await User.findOne({ where: { isAdmin: true } });
+    const admins = await User.findAll({ where: { isAdmin: true } });
     const users = await User.findAll({ where: { isAdmin: false } });
 
     const usersNames = users.map((el) => el.name);
-    const usersEmails = users.map((el) => el.email);
+    const adminNames = admins.map((el) => el.name);
+    // const usersEmails = users.map((el) => el.email);
 
-    if (admin.email === email && admin.password === password) {
-      req.session.user = { id: admin.id, name: admin.name, isAdmin: true }; // записываем в req.session.user данные (id & name) (создаем сессию)
+    // if (admin.email === email && admin.password === password) {
+    // if (admin.name === name && admin.password === password) {
+    if (adminNames.includes(name)) {
+      const ourAdmin = await User.findOne({ where: { name: req.body.name } });
+      req.session.user = {
+        id: ourAdmin.id,
+        name: ourAdmin.name,
+        isAdmin: true,
+      }; // записываем в req.session.user данные (id & name) (создаем сессию)
       res.redirect("/"); // ответ + автоматическое создание и отправка cookies в заголовке клиенту
     } 
-    if (usersNames.includes(name) && usersEmails.includes(email)) {
-      const ourUser = await User.findOne({ where: { email: req.body.email } });
+
+    if (usersNames.includes(name)) {
+      const ourUser = await User.findOne({ where: { name: req.body.name } });
       req.session.user = { id: ourUser.id, name: ourUser.name };
       res.redirect("/"); // ответ + автоматическое создание и отправка cookies в заголовке клиенту
     }
