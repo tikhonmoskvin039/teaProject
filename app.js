@@ -1,35 +1,31 @@
-const express = require('express'); 
-const app = express(); 
-require('@babel/register');
-const morgan = require('morgan'); 
-const path = require('path');
-require('dotenv').config(); 
+const express = require("express");
+const app = express();
+require("@babel/register");
+const morgan = require("morgan");
+const path = require("path");
+require("dotenv").config();
 
 //импорт вспомогательных ф-й
-const dbCheck = require('./db/dbCheck');
+const dbCheck = require("./db/dbCheck");
 
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 
-
 // импорт роутов
-const indexRoutes = require('./routes/indexRoutes');
-const teasRoutes = require('./routes/teasRoutes');
-const privateRoutes = require('./routes/privateRoutes');
+const indexRoutes = require("./routes/indexRoutes");
+const teasRoutes = require("./routes/teasRoutes");
+const privateRoutes = require("./routes/privateRoutes");
 
 const authRouter = require("./routes/auth.route");
 const privateRouter = require("./routes/private.route");
 
-
-
- // вызов функции проверки соединения с базоый данных
+// вызов функции проверки соединения с базоый данных
 dbCheck();
 
-app.use(express.static(path.resolve('public')));
-app.use(morgan('dev'));
+app.use(express.static(path.resolve("public")));
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 const sessionConfig = {
   name: "sid", // название куки
@@ -45,7 +41,6 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-
 app.use((req, res, next) => {
   console.log("\n\x1b[33m", "req.session.user :", req.session?.user);
   res.locals.username = req.session?.user?.name;
@@ -53,9 +48,9 @@ app.use((req, res, next) => {
 });
 
 //роутеры
-app.use('/', indexRoutes);
-app.use('/teas', teasRoutes);
-app.use('/private', privateRoutes);
+app.use("/", indexRoutes);
+app.use("/teas", teasRoutes);
+app.use("/private", privateRoutes);
 
 app.use("/auth", authRouter);
 app.use("/private", privateRouter);
@@ -63,6 +58,6 @@ app.use("/private", privateRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
-  if (err) return console.log('Ошибка запуска сервера.', err.message)
+  if (err) return console.log("Ошибка запуска сервера.", err.message);
   console.log(`Сервер запущен на http://localhost:${PORT} `);
 });
