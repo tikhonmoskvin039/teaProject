@@ -6,8 +6,17 @@ function SignInForm({ username, name }) {
 
   return (
     <Layout username={username}>
-      <div className="container mt-5">
-        <h2>Вход на сайт</h2>
+      <div
+        className="container mt-5 p-3"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.7)",
+          borderRadius: "20px",
+        }}
+      >
+        <div className="m-4">
+          {" "}
+          <h2>Вход на сайт</h2>
+        </div>
         <form id="signinForm" method="POST" action="/auth/signin">
           <div className="form-group">
             <label htmlFor="username">Логин:</label>
@@ -39,7 +48,7 @@ function SignInForm({ username, name }) {
               required
             />
           </div>
-          <button type="submit" className="btn btn-light">
+          <button type="submit" className="btn btn-light m-4">
             Войти
           </button>
         </form>

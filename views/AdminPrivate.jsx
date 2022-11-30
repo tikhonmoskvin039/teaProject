@@ -4,7 +4,13 @@ function PrivateAdmin({ username, allTeas }) {
   //JS Code
   return (
     <Layout username={username}>
-      <div className="container mt-5">
+      <div
+        className="container mt-5 p-2 mb-5"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.7)",
+          borderRadius: "20px",
+        }}
+      >
         <h3>Приватная страница Администратора</h3>
         <p>
           Привет, <b className="text-danger">{username}</b>.
@@ -22,7 +28,13 @@ function PrivateAdmin({ username, allTeas }) {
           </a>
         </p>
         <div class="collapse mb-4" id="collapseExample">
-          <div class="card card-body">
+          <div
+            class="card card-body"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.7)",
+              borderRadius: "20px",
+            }}
+          >
             <h5 className="card-title text-dander">
               Все поля должны быть заполнены!
             </h5>
@@ -84,7 +96,15 @@ function PrivateAdmin({ username, allTeas }) {
           </div>
         </div>
         {allTeas.map((tea) => (
-          <div class="card content mb-3" style={{ maxWidth: "100%" }} id={`${tea.id}`}>
+          <div
+            class="card content mb-3"
+            style={{
+              maxWidth: "100%",
+              backgroundColor: "rgba(255,255,255,0.7)",
+              borderRadius: "20px",
+            }}
+            id={`${tea.id}`}
+          >
             <div class="row g-0">
               <div class="col-md-4">
                 <img
@@ -141,26 +161,3 @@ function PrivateAdmin({ username, allTeas }) {
 }
 
 module.exports = PrivateAdmin;
-
-//   <li className="entry" data-id={`${tea.id}`}>
-//     <span className="teaName">{tea.name}</span>
-//     <img src={tea.picture_url} alt="" />
-//     <ul className="entry-links">
-//       <li className="entry-link">
-//         <a href={`entries/${tea.id}`}>details</a>
-//       </li>
-//       <li className="entry-link">
-//         <a
-//           data-update={`${tea.id}`}
-//           //   href={`entries/${entry.id}/edit`}
-//         >
-//           edit
-//         </a>
-//       </li>
-//       <li className="entry-link">
-//         <a id={`${tea.id}`} data-del href={`entries/${tea.id}/delete`}>
-//           delete
-//         </a>
-//       </li>
-//     </ul>
-//   </li>;

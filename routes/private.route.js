@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const { isAdmin } = require("../middlewares/functs");
+
+
 const {
   privateAdminPage,
   createTeaCard,
@@ -8,11 +11,12 @@ const {
   updateTeaCard,
 } = require("../controllers/admin.controller");
 
-router.route("/admin")
-.get(privateAdminPage)
-.post(createTeaCard)
-.delete(deleteTeaCard)
-.put(updateTeaCard)
+router
+  .route("/admin")
+  .get(isAdmin, privateAdminPage)
+  .post(isAdmin, createTeaCard)
+  .delete(isAdmin, deleteTeaCard)
+  .put(isAdmin,updateTeaCard);
 
 // router.get("/signout", deleteSession);
 
