@@ -27,3 +27,13 @@ body {
   background: url("https://artposter.com.ua/image/catalog/gallery/product_images/003758/flat/003758_flat.jpg");
   background-size: cover;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.top {
+  flex-grow: 1;
+}

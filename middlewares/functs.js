@@ -3,7 +3,6 @@
 //   else res.redirect("/auth/signin");
 // };
 
-
 exports.isAdmin = (req, res, next) => {
   if (req.session?.user?.isAdmin === true) next();
   else res.redirect("/private");
@@ -17,4 +16,3 @@ exports.isValid = (req, res, next) => {
     // next('Validation Error');
   }
 };
-

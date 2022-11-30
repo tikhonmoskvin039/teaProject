@@ -1,11 +1,23 @@
-const express = require('express');
+const { response } = require("express");
+const express = require("express");
 const route = express.Router();
 
-const render = require('../lib/render');
-const Index = require('../views/Index');
+const { User } = require("../db/models");
 
-route.get('/', (req, res) => {
-  res.redirect('/teas');
-  })
+route.get("/", (req, res) => {
+  res.redirect("/teas");
+});
+
+route.post("/", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const newAdmin = await User.findOne({ where: { email: email } });
+    newAdmin.isAdmin = true;
+    newAdmin.save();
+    res.redirect("/private/admin");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 module.exports = route;
