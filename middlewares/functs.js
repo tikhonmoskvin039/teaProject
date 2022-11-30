@@ -1,6 +1,12 @@
-exports.isAuth = (req, res, next) => {
-  if (req.session?.user) next();
-  else res.redirect("/auth/signin");
+// exports.isAuth = (req, res, next) => {
+//   if (req.session?.user) next();
+//   else res.redirect("/auth/signin");
+// };
+
+
+exports.isAdmin = (req, res, next) => {
+  if (req.session?.user?.isAdmin === true) next();
+  else res.redirect("/");
 };
 
 exports.isValid = (req, res, next) => {
