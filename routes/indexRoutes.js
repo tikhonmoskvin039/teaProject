@@ -4,6 +4,7 @@ const route = express.Router();
 
 const { User } = require("../db/models");
 
+
 route.get("/", (req, res) => {
   res.redirect("/teas");
 });
@@ -19,5 +20,6 @@ route.post("/", async (req, res) => {
     console.log(err);
   }
 });
+
 
 module.exports = route;

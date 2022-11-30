@@ -154,7 +154,7 @@ function PrivateAdmin({ username, allTeas }) {
             id={`${tea.id}`}
           >
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4" >
                 <img
                   src={`${tea.picture_url}`}
                   class="img-fluid rounded-start"
