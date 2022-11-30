@@ -19,11 +19,5 @@ privateDelBtns?.forEach((btn) => {
         });
         const delInfo = await response.json();
         console.log("del.info", delInfo)
-        // const templateEnd = `
-        // <div className="col-sm-6">
-        //     <h3>Список комментариев пуст</h3>
-        // </div>            
-        // `
-        // privateDelBtns ? insertAdjacenentHTML('beforeend', templateEnd);
     });
 })

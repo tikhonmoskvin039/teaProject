@@ -7,7 +7,7 @@ const Private = require('../views/Private');
 const { User, Tea, Comment } = require('../db/models');
 
 route.get('/', async (req, res) => {
-    const user_id = 2;//req.session.id//как достаем, из сессии?
+    const user_id = req.session.id
     try {
         const ame = await User.findOne({ where: { id: user_id }, raw: true });
         const comments = await User.findAll({ where: { id: user_id }, include: [{ model: Tea }], raw: true })
