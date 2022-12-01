@@ -87,7 +87,7 @@ function PrivateAdmin({ username, allTeas }) {
             <h5 className="card-title text-dander">
               Все поля должны быть заполнены!
             </h5>
-            <form id="signinForm" method="POST" action="/private/admin">
+            <form data-addNewForm name="addNewForm" id="signinForm">
               <div className="form-group">
                 <label htmlFor="name">Название чая:</label>
                 <input
@@ -107,7 +107,7 @@ function PrivateAdmin({ username, allTeas }) {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="picture_url">Добавьте описание чая:</label>
+                <label htmlFor="info">Добавьте описание чая:</label>
                 <textarea
                   className="form-control"
                   name="info"
@@ -153,12 +153,11 @@ function PrivateAdmin({ username, allTeas }) {
             }}
             id={`${tea.id}`}
           >
-            <div class="row g-0">
-              <div class="col-md-4" >
+            <div class="row">
+              <div class="col-md-4">
                 <img
                   src={`${tea.picture_url}`}
-                  class="img-fluid rounded-start"
-                  style={{ width: "400px", height: "400px" }}
+                  class="allImages img-fluid rounded-start"
                   alt="..."
                 />
               </div>
