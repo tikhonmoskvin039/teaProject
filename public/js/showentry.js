@@ -1,5 +1,7 @@
 const addButton = document.querySelector('#entryButton')
-const deleButton = document.querySelectorAll('.list-group-item')
+const IdTea = document.querySelector('.card-title').id
+
+
 // console.log(addButton)
 addButton?.addEventListener('click', async (event) => {
     event.preventDefault()
@@ -33,7 +35,8 @@ addButton?.addEventListener('click', async (event) => {
         });
         const data = await response.json();
         // console.log(data)
-        const {id, name, isAdmin} = data
+        const {id, name, isAdmin, commentId} = data
+        console.log(data)
         if (name) {
             addButton.innerHTML = `                <button
             class="btn btn-outline-success"
@@ -49,16 +52,70 @@ addButton?.addEventListener('click', async (event) => {
           </div>
             <div>
               <p class="mb-1">${text}</p>
-            </div></div>`)
+            </div><button class="btn btn-outline-success btn-sm" data-change=${commentId}>изменить</button><button class="btn btn-outline-success btn-sm" data-delete=${commentId}>удалить</button></div>`)
         }
     }
 
+
 })
-console.log(deleButton)
-deleButton.forEach((el)=>{
+let Boxes = document.querySelector('.list-group')
+console.log(Boxes)
+Boxes.addEventListener('click', async (event)=>{
+        if(event.target.dataset.delete){
+            console.log(event.target)
+            const deleteMessage = event.target.dataset.delete
+            const response = await fetch(`/teas/${deleteMessage}`, {
+                method: 'DELETE',
+                headers: {
+                  'Content-type': 'application/json',
+                },
+              });
+              const data = await response.json();
+              if (data) {
+                console.log(data);
+                event.target.closest('.list-group-item').remove()
+              }
+        }
+
+        if(event.target.dataset.change){
+            console.log(event.target)
+            let box =  event.target.closest('.list-group-item')
+            const text = box.querySelector('p').innerHTML
+            const messageId = event.target.dataset.change
+            console.log(messageId)
+            box.innerHTML= `   <div class="mb-3">
+            <label  name="text" type="text" class="form-label">Измените комментарий:</label>
+            <textarea class="form-control" id=${messageId} rows="3">${text}</textarea>
+            </br>
+            <button
+            class="btn btn-outline-success"
+            value="Добавить отзыв"
+            type="submit" id="changeText">Изменить отзыв</button>
+            </div>`}
+            if (event.target.id === "changeText"){
+                 const changeMessage = event.target.closest('div').querySelector('.form-control').value
+                const messageId = event.target.closest('div').querySelector('.form-control').id
+                const box = event.target.closest('div').parentNode
+                console.log(box)
+            const response = await fetch(`/teas/${IdTea}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-type': 'application/json',
+                },
+                body: JSON.stringify({ changeMessage, messageId }),
+              });
+              const data = await response.json();
+               const {name} = data
+               console.log('.....',data)
+              if (data) {
+                box.innerHTML = `<div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">${name}</h5>
     
-    console.log(el?.querySelector("#delete-button"))
-    el?.querySelector("#delete-button")?.addEventListener('click', ()=>{
-         el.remove()
-})
+              </div>
+                <div>
+                  <p class="mb-1">${changeMessage}</p>
+                </div><button class="btn btn-outline-success btn-sm" data-change=${messageId}>изменить</button><button class="btn btn-outline-success btn-sm" data-delete=${messageId}>удалить</button>`
+               }
+        }
+
 })
