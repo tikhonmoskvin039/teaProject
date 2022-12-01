@@ -18,14 +18,15 @@ exports.privateAdminPage = async (req, res) => {
 exports.createTeaCard = async (req, res) => {
   const { name, picture_url, info, placeOfBirth, coordinates } = req.body;
   try {
-    const allTeas = await Tea.create({
+    const create = await Tea.create({
       name,
       picture_url,
       info,
       placeOfBirth,
       coordinates,
     });
-    res.redirect("/private/admin");
+    // res.redirect("/private/admin");
+    res.json({ create });
   } catch (err) {
     console.error(err);
   }
@@ -50,7 +51,8 @@ exports.updateTeaCard = async (req, res) => {
     updateTea.placeOfBirth = placeOfBirth;
     updateTea.coordinates = coordinates;
     updateTea.save();
-    res.redirect("/private/admin");
+    // res.json({ status: 200, updateTea });
+    res.json({ updateTea });
   } catch (err) {
     console.error(err);
   }
