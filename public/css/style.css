@@ -27,17 +27,23 @@ body {
   background: url("https://artposter.com.ua/image/catalog/gallery/product_images/003758/flat/003758_flat.jpg");
   background-size: cover;
 }
-
-
+.tea-name{
+  display: flex;
+  justify-content: center;
+}
 .imgDiv {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+.imgDiv img{
   max-width: 500px;
 }
-
 .description {
   padding: 10px;
+  display: flex;
+  justify-content: center;
 }
+
 .wrapper {
   display: flex;
   flex-direction: column;

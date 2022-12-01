@@ -1,15 +1,16 @@
 const addButton = document.querySelector('#entryButton')
+const deleButton = document.querySelectorAll('.list-group-item')
 // console.log(addButton)
-addButton.addEventListener('click', async (event) => {
+addButton?.addEventListener('click', async (event) => {
     event.preventDefault()
     const teaId = event.target.dataset.details
-    const userId = 1;
     if (event.target.dataset.details) {
         addButton.innerHTML = `
 
         <div class="mb-3">
         <label  name="text" type="text" class="form-label">Оставьте комментарий:</label>
         <textarea class="form-control" id="text_input" rows="3"></textarea>
+        </br>
         <button
         class="btn btn-outline-success"
         value="Добавить отзыв"
@@ -28,22 +29,34 @@ addButton.addEventListener('click', async (event) => {
             headers: {
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({ userId, text }),
+            body: JSON.stringify({ text }),
         });
         const data = await response.json();
-        if (data) {
-            addButton.innerHTML = `      <div id="entryButton">
-            <button
-                  value="add"
-                  type="button"
-                  data-details=${teaId}
-                  >
-                      Оставить комментарий
-                  </button>
-                  </div>`;
+        // console.log(data)
+        const {id, name, isAdmin} = data
+        if (name) {
+            addButton.innerHTML = `                <button
+            class="btn btn-outline-success"
+            value="add"
+            type="button"
+            data-details=${teaId}
+          >Оставить комментарий
+          </button>`;
             const list = document.querySelector('#list');
-            list.insertAdjacentHTML("afterbegin", `<li>12<p>${text}`)
+            list.insertAdjacentHTML("afterbegin", `<div class="list-group-item "><div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">${name}</h5>
+
+          </div>
+            <div>
+              <p class="mb-1">${text}</p>
+            </div></div>`)
         }
     }
 
+})
+deleButton.forEach((el)=>{
+    console.log(el.querySelector("#delete-button"))
+    el.querySelector("#delete-button").addEventListener('click', ()=>{
+         el.remove()
+})
 })
