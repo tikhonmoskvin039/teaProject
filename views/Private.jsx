@@ -2,7 +2,8 @@
 const React = require("react");
 const Layout = require("./Layout");
 
-function Private({ comments, username = "" }) {
+function Private({ commentsArr, commentes, username = "" }) {
+  console.log(commentsArr)
   return (
     <Layout username={username}>
       <script defer src="/js/private.js"></script>
@@ -11,24 +12,30 @@ function Private({ comments, username = "" }) {
         <h2>Hello, {username}</h2>
         <div class="row">
           <div
-            // class="foo"
-            className="row container mt-5 p-3"
+            className="row container mt-5 p-3 private_box"
             style={{
               backgroundColor: "rgba(255,255,255,0.7)",
               borderRadius: "20px",
             }}
           >
-            {comments[0]["Teas.Comment.text"] ? (
-              comments.map((comment, index) => (
-                <div className="col-sm-6">
-                  <h4 id="scrollspyHeading1">{comment["Teas.name"]}</h4>
-                  {/* <p>{comment["Teas.Comment.createdAt"]}</p> */}
-                  <p>{console.log(new Date(comment["Teas.Comment.text"]))}</p>
-                  <p>{comment["Teas.Comment.text"]}</p>
+            {commentsArr ? (
+              commentsArr.reverse().map((comment, index) => (
+                <div className="col-sm-6 comment-box">
+                  <h4 id="scrollspyHeading1">{commentes.reverse()[index]["Teas.name"]}</h4>
+                  <p>{comment.time.toDateString()}</p>
+
+                  <p>{comment.text}</p>
                   <a
                     href="#"
-                    data-delBtn={index + 1}
-                    class="btn btn-primary btn-sm"
+                    data-updBtn={`${comment.comment_id},${comment.text}`}
+                    class="btn btn-outline-success"
+                  >
+                    Редактировать комментарий
+                  </a>
+                  <a
+                    href="#"
+                    data-delBtn={comment.comment_id}
+                    class="btn btn-outline-danger"
                   >
                     Удалить комментарий
                   </a>
