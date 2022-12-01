@@ -1,7 +1,12 @@
-// exports.isAuth = (req, res, next) => {
-//   if (req.session?.user) next();
-//   else res.redirect("/auth/signin");
-// };
+const render = require("../lib/render");
+
+const AuthError = require("../views/ErrorAuth");
+
+exports.isAuth = (req, res, next) => {
+  if (req.session?.user) next();
+  // else res.redirect("/auth/signin");
+  else render(AuthError, {}, res);
+};
 
 exports.isAdmin = (req, res, next) => {
   if (req.session?.user?.isAdmin === true) next();

@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const route = express.Router();
 
-const render = require('../lib/render');
-const Private = require('../views/Private');
+const render = require("../lib/render");
+const Private = require("../views/Private");
 
-const { User, Tea, Comment } = require('../db/models');
+const { User, Tea, Comment } = require("../db/models");
 
 route.get('/', async (req, res) => {
     const user_id = req?.session?.user?.id

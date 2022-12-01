@@ -4,13 +4,16 @@ const Layout = require('./Layout');
 function Teas({ title, username }) {
   return (
     <Layout username={username}>
-      <h1 className='d-flex justify-content-center' style={{ fontFamily: "Shanghai_rus", fontWeight: "700" , fontSize: "50px", color: "beige"}}>
+      <div className="container">
+      <div class="centralText" style={{ fontFamily: "Shanghai_rus", fontWeight: "700" , color: "beige"}}>
         Добро пожаловать в мир чая!
-      </h1>
+      </div>
       <link rel="stylesheet" href="/css/stylemap.css"></link>
       <script defer src="/js/teas.js"></script>
       <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"></script>
-      <div id="map" className="map" style={{borderRadius: "15px"}}></div>
+      <div id="map" className="map" style={{borderRadius: "15px", width: "100%"}}></div>
+
+      </div>
     </Layout>
   );
 }

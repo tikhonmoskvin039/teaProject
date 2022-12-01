@@ -71,22 +71,6 @@ function Layout({ title, children, username = "" }) {
                         <a class="nav-link text-danger" href="/auth/signout">
                           <b>Выход</b>
                         </a>
-                        <a href="/">
-                          <img
-                            src="https://cdn-icons-png.flaticon.com/512/2972/2972000.png"
-                            class="card-img-top"
-                            title="HOME PAGE"
-                            alt="..."
-                            style={{
-                              width: "85px",
-                              position: "absolute",
-                              right: "5%",
-                              top: "1%",
-                              zIndex: "100",
-                              height: "85px",
-                            }}
-                          />
-                        </a>
                       </>
                     ) : (
                       <>
@@ -100,29 +84,27 @@ function Layout({ title, children, username = "" }) {
                         <a class="nav-link" href="/auth/signup">
                           Регистрация
                         </a>
-                        <a href="/">
-                          <img
-                            src="https://cdn-icons-png.flaticon.com/512/2972/2972000.png"
-                            class="card-img-top"
-                            title="HOME PAGE"
-                            alt="..."
-                            style={{
-                              width: "85px",
-                              position: "absolute",
-                              right: "5%",
-                              top: "1%",
-                              zIndex: "100",
-                              height: "85px",
-                            }}
-                          />
-                        </a>
                       </>
                     )}
                   </div>
                 </div>
               </div>
             </nav>
-            <div className="container pb-4 pt-4">{children}</div>
+              <a href="/">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2972/2972000.png"
+                  class="dataIcon card-img-top"
+                  title="HOME PAGE"
+                  alt="..."
+                  style={{
+                    position: "absolute",
+                    right: "5%",
+                    top: "1%",
+                    zIndex: "100",
+                  }}
+                />
+              </a>
+            <div className="container pb-4 pt-3">{children}</div>
           </div>
           <footer
             class="text-center text-white"
@@ -133,7 +115,7 @@ function Layout({ title, children, username = "" }) {
             <div class="container">
               <section>
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"
@@ -142,7 +124,7 @@ function Layout({ title, children, username = "" }) {
                 </a>
 
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"
@@ -151,7 +133,7 @@ function Layout({ title, children, username = "" }) {
                 </a>
 
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"
@@ -160,7 +142,7 @@ function Layout({ title, children, username = "" }) {
                 </a>
 
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"
@@ -169,7 +151,7 @@ function Layout({ title, children, username = "" }) {
                 </a>
 
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"
@@ -178,7 +160,7 @@ function Layout({ title, children, username = "" }) {
                 </a>
 
                 <a
-                  class="btn btn-link btn-floating btn-lg text-dark m-1"
+                  class="btn btn-link btn-floating btn-lg text-dark"
                   href="#!"
                   role="button"
                   data-mdb-ripple-color="dark"

@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const path = require("path");
 require("dotenv").config();
 
+const render = require("./lib/render");
+const Err404 = require("./views/Error404");
+
 //импорт вспомогательных ф-й
 const dbCheck = require("./db/dbCheck");
 
@@ -55,6 +58,9 @@ app.use("/private", privateRoutes);
 app.use("/auth", authRouter);
 app.use("/private", privateRouter);
 
+app.get("*", (req, res) => {
+  render(Err404, {}, res);
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {

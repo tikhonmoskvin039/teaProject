@@ -27,17 +27,21 @@ body {
   background: url("https://artposter.com.ua/image/catalog/gallery/product_images/003758/flat/003758_flat.jpg");
   background-size: cover;
 }
-.tea-name{
+
+.tea-name {
   display: flex;
   justify-content: center;
 }
+
 .imgDiv {
   display: flex;
   justify-content: center;
 }
-.imgDiv img{
+
+.imgDiv img {
   max-width: 500px;
 }
+
 .description {
   padding: 10px;
   display: flex;
@@ -60,4 +64,166 @@ body {
   flex-direction: row;
   width: auto;
   flex-wrap: wrap;
+}
+
+.dataIcon {
+  width: 85px;
+  height: 85px;
+}
+
+.centralText {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  margin-top: 0;
+}
+
+.allImages {
+  display: flex;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+}
+
+.error404 {
+  font-size: 50px;
+}
+
+.errMainAuth {
+  font-size: 50px;
+}
+
+.errMessageAuth {
+  font-size: 30px;
+}
+
+
+@media (max-width: 1200px) {
+  .dataIcon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .centralText {
+    font-size: 45px;
+  }
+
+  .allImages {
+    width: 330px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .dataIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .centralText {
+    font-size: 30px;
+  }
+
+  .allImages {
+    width: 240px;
+    height: 240px;
+  }
+
+  .errMainAuth {
+    font-size: 40px;
+  }
+
+  .errMessageAuth {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .centralText {
+    font-size: 30px;
+  }
+
+  .error404 {
+    font-size: 35px;
+  }
+
+  .errMainAuth {
+    font-size: 35px;
+  }
+
+  .errMessageAuth {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dataIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .centralText {
+    font-size: 30px;
+  }
+
+  .errMainAuth {
+    font-size: 30px;
+  }
+
+  .errMessageAuth {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 550px) {
+  .centralText {
+    font-size: 25px;
+  }
+
+  .error404 {
+    font-size: 30px;
+  }
+
+  .errMainAuth {
+    font-size: 25px;
+  }
+
+  .errMessageAuth {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 450px) {
+  .centralText {
+    font-size: 20px;
+  }
+
+  .errMainAuth {
+    font-size: 25px;
+  }
+
+  .errMessageAuth {
+    font-size: 13px;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .centralText {
+    font-size: 18px;
+  }
+
+  .error404 {
+    font-size: 25px;
+  }
+
+  .errMainAuth {
+    font-size: 15px;
+  }
+
+  .errMessageAuth {
+    font-size: 2px;
+  }
 }
