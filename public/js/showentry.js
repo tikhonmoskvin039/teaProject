@@ -54,9 +54,11 @@ addButton?.addEventListener('click', async (event) => {
     }
 
 })
+console.log(deleButton)
 deleButton.forEach((el)=>{
-    console.log(el.querySelector("#delete-button"))
-    el.querySelector("#delete-button").addEventListener('click', ()=>{
+    
+    console.log(el?.querySelector("#delete-button"))
+    el?.querySelector("#delete-button")?.addEventListener('click', ()=>{
          el.remove()
 })
 })

@@ -19,7 +19,10 @@ route.get('/all', async (req, res) => {
 route.get('/:id', async (req, res) => {
   const {id, name, isAdmin} = req.session?.user
   const teaId = req.params.id
-  const tea = await Tea.findAll({ where: { id: teaId }, include:[ { model:User }],order: [[User,{Tea},'updatedAt', 'DESC']], raw: true })
+  const tea = await Tea.findAll({ where: { id: teaId }, include:[ { model:User}], through:{attributes:{include:[`id`]}}, raw: true })
+  const comments = await Comment.findAll({attributes:{include:[`id`]}, raw:true})
+  console.log(comments)
+  console.log(tea)
   tea.sort((a, b)=>b["Users.Comment.updatedAt"].getTime() - a["Users.Comment.updatedAt"].getTime())
 render(ShowEntry, { tea, id, name, isAdmin }, res)
 })

@@ -49,14 +49,14 @@ function ShowEntry({ tea, id, name, isAdmin, username  }) {
                 <br />
                 <div id='list' class="list-group">
                   {tea.map((el) => {
-                    console.log( id)
+                    // console.log( id)
                     return (<div class="list-group-item "><div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1">{el['Users.name']}</h5>
 
                     </div>
                       <div>
                         <p class="mb-1">{el['Users.Comment.text']}</p>
-                      </div>{(el['Users.id']==id) ?(<button id="delete-button">удалить</button>):('')}</div>)
+                      </div>{(el['Users.id']==id || isAdmin) ?(<button id="delete-button">удалить</button>):('')}</div>)
                   })}
 
 
