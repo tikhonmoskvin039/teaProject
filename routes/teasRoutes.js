@@ -7,6 +7,7 @@ const { Tea, Comment, User } = require('../db/models')
 const Teas = require('../views/Teas');
 
 route.get('/', (req, res) => {
+
   render(Teas, { title: 'Чай' }, res)
 })
 route.get('/all', async (req, res) => {
@@ -16,18 +17,23 @@ route.get('/all', async (req, res) => {
 })
 
 route.get('/:id', async (req, res) => {
+  const {id, name, isAdmin} = req.session?.user
   const teaId = req.params.id
   const tea = await Tea.findAll({ where: { id: teaId }, include:[ { model:User }],order: [[User,{Tea},'updatedAt', 'DESC']], raw: true })
   tea.sort((a, b)=>b["Users.Comment.updatedAt"].getTime() - a["Users.Comment.updatedAt"].getTime())
-render(ShowEntry, { tea }, res)
+render(ShowEntry, { tea, id, name, isAdmin }, res)
 })
 route.post('/:id', async (req, res) => {
+  // console.log(res.locals.username)
+  const data = req.session?.user
+  const {id, name, isAdmin} = req.session?.user
   const teaId =  req.params.id
-  const {userId, text} =  req.body
-  const newEntry = await Comment.create({user_id:userId, tea_id:teaId, text})
-  console.log(userId,teaId,text )
+  const { text} =  req.body
+  const newEntry = await Comment.create({user_id:id, tea_id:teaId, text})
+  console.log(newEntry)
+  console.log(teaId,text )
   //const comment = await Comment.create()
-  res.json({ status: 200, text: 'biba' });
+  res.json( data );
 })
 
 

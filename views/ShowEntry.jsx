@@ -1,7 +1,8 @@
+const e = require('express');
 const React = require('react');
 const Layout = require('./Layout');
 
-function ShowEntry({ tea, username }) {
+function ShowEntry({ tea, id, name, isAdmin, username  }) {
   return (
     <Layout username={username}>
       <script defer src="/js/showentry.js"></script>
@@ -16,7 +17,7 @@ function ShowEntry({ tea, username }) {
           class="card content mb-3"
           style={{
             maxWidth: "100%",
-            backgroundColor: "rgba(255,255,255,0.7)",
+            backgroundColor: 'white',
             borderRadius: "20px",
           }}>
 
@@ -24,7 +25,7 @@ function ShowEntry({ tea, username }) {
           <div className='description'>
             <div className="col-md-8">
               <div className="card-body">
-                <h5 class="card-title">{tea[0].name}</h5>
+                <h5 class="card-title tea-name">{tea[0].name}</h5>
               </div>
               <div className="imgDiv"><img src={tea[0].picture_url} alt={tea[0].name} class="img-fluid rounded-start"></img></div>
               <br />
@@ -32,7 +33,8 @@ function ShowEntry({ tea, username }) {
               <br />
               <div><p>Страна происхождения:<b>{tea[0].placeOfBirth}</b></p></div>
               <br />
-              <div id="entryButton">
+
+             {username? (<div id="entryButton">
                 <button
                   class="btn btn-outline-success"
                   value="add"
@@ -41,19 +43,20 @@ function ShowEntry({ tea, username }) {
                 >
                   Оставить комментарий
                 </button>
-              </div>
+              </div>) :('') }
               <br />
               <div> Комментарии пользователей:
                 <br />
                 <div id='list' class="list-group">
                   {tea.map((el) => {
+                    console.log( id)
                     return (<div class="list-group-item "><div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1">{el['Users.name']}</h5>
 
                     </div>
                       <div>
                         <p class="mb-1">{el['Users.Comment.text']}</p>
-                      </div></div>)
+                      </div>{(el['Users.id']==id) ?(<button id="delete-button">удалить</button>):('')}</div>)
                   })}
 
 
