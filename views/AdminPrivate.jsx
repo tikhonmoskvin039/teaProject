@@ -76,7 +76,7 @@ function PrivateAdmin({ username, allTeas }) {
             Добавить новый чай
           </a>
         </p>
-        <div class="collapse mb-4" id="collapseExample">
+        <div class="collapse mb-4 second" id="collapseExample">
           <div
             class="card card-body"
             style={{
@@ -156,6 +156,7 @@ function PrivateAdmin({ username, allTeas }) {
             <div class="row">
               <div class="col-md-4">
                 <img
+                  name="picture_url"
                   src={`${tea.picture_url}`}
                   class="allImages img-fluid rounded-start"
                   alt="..."
@@ -163,14 +164,20 @@ function PrivateAdmin({ username, allTeas }) {
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{tea.name}</h5>
-                  <p class="card-text">{tea.info}</p>
+                  <h5 class="card-title" name="name">
+                    {tea.name}
+                  </h5>
+                  <p class="card-text" name="info">
+                    {tea.info}
+                  </p>
                   <p class="card-text">
                     <p>
-                      Место происхождения: <b>{tea.placeOfBirth}</b>
+                      Место происхождения:{" "}
+                      <b name="placeOfBirth">{tea.placeOfBirth}</b>
                     </p>
                     <p>
-                      Географические координаты: <b>{tea.coordinates}</b>
+                      Географические координаты:{" "}
+                      <b name="coordinates">{tea.coordinates}</b>
                     </p>
                     <small class="text-muted">
                       Запись создана: <b>{tea.createdAt.toTimeString()}</b>
