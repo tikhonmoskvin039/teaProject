@@ -52,7 +52,7 @@ addButton?.addEventListener('click', async (event) => {
           </div>
             <div>
               <p class="mb-1">${text}</p>
-            </div><button class="btn btn-outline-success btn-sm m-2" data-change=${commentId}>изменить</button><button class="btn btn-outline-success btn-sm m-2" data-delete=${commentId}>удалить</button></div>`)
+            </div><button class="btn btn-outline-success btn-sm m-2" data-change=${commentId}>изменить</button><button class="btn btn-outline-danger btn-sm m-2" data-delete=${commentId}>удалить</button></div>`)
         }
     }
 

@@ -23,15 +23,13 @@ function Private({ commentsArr, commentes, username = "" }) {
               commentsArr.reverse().map((comment, index) => (
                 <div
                   className="comment-box"
-                  style={
-                    {
-                      maxWidth: "100%",
-                      marginBottom: "2%",
-                      backgroundColor: "rgba(255,255,255,0.7)",
-                      borderRadius: "20px",
-                      padding: "2%"
-                    }
-                  }
+                  style={{
+                    maxWidth: "100%",
+                    marginBottom: "2%",
+                    backgroundColor: "rgba(255,255,255,0.7)",
+                    borderRadius: "20px",
+                    padding: "2%",
+                  }}
                   id={`${comment.comment_id}`}
                   data-updtext={`${comment.text}`}
                   data-teaname={commentes[index]["Teas.name"]}
@@ -57,7 +55,7 @@ function Private({ commentsArr, commentes, username = "" }) {
                     <button
                       href="#"
                       data-delBtn={comment.comment_id}
-                      class="btn btn-outline-danger"
+                      class="button btn btn-outline-danger"
                     >
                       Удалить комментарий
                     </button>

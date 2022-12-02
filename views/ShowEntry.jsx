@@ -83,7 +83,7 @@ function ShowEntry({ tea, id, name, isAdmin, username, commentsUsers }) {
                       <div
                         class="list-group-item"
                         style={{
-                          borderRadius: "20px",
+                          // borderRadius: "20px",
                           marginBottom: "2%",
                         }}
                       >
