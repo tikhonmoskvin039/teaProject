@@ -1,27 +1,18 @@
-const container = document.querySelector(".container.pb-4.pt-3");
+const container = document.querySelector(".container");
 
 container.addEventListener("click", async (e) => {
   const bigTeaBox = e.target.closest(".card");
-
-  // const oldData = bigTeaBox.innerHTML;
-
-  const pictureURL = bigTeaBox?.querySelector(".allImages").src || "";
-  const name = bigTeaBox?.querySelector(".card-title").innerText || "";
-  const info = bigTeaBox?.querySelector(".card-text").innerText || "";
-  const placeOfBirth = bigTeaBox?.querySelector("b").innerText || "";
-  const coordinates =
-    bigTeaBox?.querySelector('[name="coordinates"]').innerText || "";
+  const oldData = bigTeaBox?.innerHTML;
 
   if (e.target.textContent === "Удалить") {
     const id = e.target.closest(".card").id;
 
     // e.target?.closest(".card.card-body.edit").remove();
     e.target.closest(".card.content.mb-3").remove();
-    e.target.closest(".card").remove();
 
     let response;
     try {
-      response = await fetch("/private/admin", {
+      response = await fetch("/private/admin/", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -35,9 +26,17 @@ container.addEventListener("click", async (e) => {
       console.log("err");
     }
   } else if (e.target.textContent === "Редактировать") {
+    console.log(e.target.closest(".card"))
+    const bigTeaBox = e.target.closest(".card");
+    const pictureURL = e.target.closest(".card")?.querySelector(".allImages")?.src || "";
+    const name = e.target.closest(".card")?.querySelector(".card-title")?.innerText || "";
+    const info = e.target.closest(".card")?.querySelector(".card-text")?.innerText || "";
+    const placeOfBirth = e.target.closest(".card")?.querySelector("b")?.innerText || "";
+    const coordinates =
+    e.target.closest(".card")?.querySelector('[name="coordinates"]')?.innerText || "";
     const template = `
    <div class="card card-body edit">
-            <form id="updForm">
+            <form id="updform">
               <div class="form-group">
                 <label htmlFor="name" style="width: 100%;">Название чая:</label>
                 <input
@@ -45,7 +44,7 @@ container.addEventListener("click", async (e) => {
                   style="width: 100%;"
                   name="name"
                   type="text"
-                  required
+                  
                   value="${name}"
                 />
               </div>
@@ -57,7 +56,7 @@ container.addEventListener("click", async (e) => {
                   type="text"
                   style="width: 100%;"
                   value="${pictureURL}"
-                  required
+                  
                 />
               </div>
               <div className="form-group">
@@ -66,7 +65,7 @@ container.addEventListener("click", async (e) => {
                   name="info"
                   type="text"
                   style="width: 100%;"
-                  required>
+                  >
                   "${info}"
                   </textarea>
                       </div>
@@ -80,7 +79,7 @@ container.addEventListener("click", async (e) => {
                   type="text"
                   style="width: 100%;"
                   value="${placeOfBirth}"
-                  required
+                  
                 />
               </div>
               <div className="form-group">
@@ -93,12 +92,12 @@ container.addEventListener("click", async (e) => {
                   name="coordinates"
                   type="text"
                   value="${coordinates}"
-                  required
+                  
                 />
               </div>
               <div class="d-flex justify-content-around">
 
-              <button data-Cancel type="button" class="btn btn-outline-danger mt-2" href="/private/admin">Отменить</button>
+              <button data-Cancel type="button" class="btn btn-outline-danger mt-2" >Отменить</button>
               <button data-save type="submit" class="btn btn-outline-warning mt-2" >Сохранить</button>
               </div>
             </form>
@@ -110,7 +109,8 @@ container.addEventListener("click", async (e) => {
   const editCard = document.querySelector(".card.card-body.edit");
 
   editCard?.addEventListener("click", async (e) => {
-    const updateForm = document.querySelector("#updForm");
+    console.log('1111')
+    const updateForm = document.querySelector("#updform");
     const id = e.target.closest(".card.content").id;
     const name = updateForm.name.value;
     const picture_url = updateForm.picture_url.value;
@@ -194,10 +194,10 @@ container.addEventListener("click", async (e) => {
         console.log("err", err);
       }
     }
-    // else if (e.target.textContent === "Отменить") {
-    //   const editCard = document.querySelector(".card.card-body.edit");
-    //   editCard.innerHTML = oldData;
-    // }
+    else if (e.target.textContent === "Отменить") {
+      const editCard = document.querySelector(".card.card-body.edit");
+      editCard.innerHTML = oldData;
+    }
   });
 });
 
