@@ -1,78 +1,22 @@
 const container = document.querySelector(".container.pb-4.pt-3");
 
-const template = `
-   <div class="card card-body edit">
-            <form id="updForm">
-              <div class="form-group">
-                <label htmlFor="name" style="width: 100%;">Название чая:</label>
-                <input
-                  className="form-control"
-                  style="width: 100%;"
-                  name="name"
-                  type="text"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="picture_url" style="width: 100%;">Введите URL картинки:</label>
-                <input
-                  className="form-control"
-                  name="picture_url"
-                  type="text"
-                  style="width: 100%;"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="picture_url">Добавьте описание чая:</label>
-                <textarea className="form-control"
-                  name="info"
-                  type="text"
-                  style="width: 100%;"
-                  required>
-                  </textarea>
-                      </div>
-              <div className="form-group">
-                <label htmlFor="placeOfBirth" style="width: 100%;">
-                  Добавьте страну происхождения:
-                </label>
-                <input
-                  className="form-control"
-                  name="placeOfBirth"
-                  type="text"
-                  style="width: 100%;"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="coordinates" style="width: 100%;">
-                  И введите географические координаты:
-                </label>
-                <input
-                  className="form-control"
-                  style="width: 100%;"
-                  name="coordinates"
-                  type="text"
-                  placeholder="Пример: 35.421522, 104.144439"
-                  required
-                />
-              </div>
-              <div class="d-flex justify-content-around">
-
-              <button data-Cancel type="button" class="btn btn-outline-danger mt-2" href="/private/admin">Отменить</button>
-              <button data-save type="submit" class="btn btn-outline-warning mt-2" >Сохранить</button>
-              </div>
-            </form>
-          </div>
-`;
-
 container.addEventListener("click", async (e) => {
   const bigTeaBox = e.target.closest(".card");
-  console.log("bigTeaBox", bigTeaBox);
-  const oldData = bigTeaBox.innerHTML;
-  console.log("oldData", oldData);
+
+  // const oldData = bigTeaBox.innerHTML;
+
+  const pictureURL = bigTeaBox?.querySelector(".allImages").src || "";
+  const name = bigTeaBox?.querySelector(".card-title").innerText || "";
+  const info = bigTeaBox?.querySelector(".card-text").innerText || "";
+  const placeOfBirth = bigTeaBox?.querySelector("b").innerText || "";
+  const coordinates =
+    bigTeaBox?.querySelector('[name="coordinates"]').innerText || "";
+
   if (e.target.textContent === "Удалить") {
     const id = e.target.closest(".card").id;
+
+    // e.target?.closest(".card.card-body.edit").remove();
+    e.target.closest(".card.content.mb-3").remove();
     e.target.closest(".card").remove();
 
     let response;
@@ -87,18 +31,85 @@ container.addEventListener("click", async (e) => {
         }),
       });
       const data = await response.json();
-      console.log("data", data);
     } catch (err) {
       console.log("err");
     }
   } else if (e.target.textContent === "Редактировать") {
+    const template = `
+   <div class="card card-body edit">
+            <form id="updForm">
+              <div class="form-group">
+                <label htmlFor="name" style="width: 100%;">Название чая:</label>
+                <input
+                  className="form-control"
+                  style="width: 100%;"
+                  name="name"
+                  type="text"
+                  required
+                  value="${name}"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="picture_url" style="width: 100%;">Введите URL картинки:</label>
+                <input
+                  className="form-control"
+                  name="picture_url"
+                  type="text"
+                  style="width: 100%;"
+                  value="${pictureURL}"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="picture_url">Добавьте описание чая:</label>
+                <textarea className="form-control"
+                  name="info"
+                  type="text"
+                  style="width: 100%;"
+                  required>
+                  "${info}"
+                  </textarea>
+                      </div>
+              <div className="form-group">
+                <label htmlFor="placeOfBirth" style="width: 100%;">
+                  Добавьте страну происхождения:
+                </label>
+                <input
+                  className="form-control"
+                  name="placeOfBirth"
+                  type="text"
+                  style="width: 100%;"
+                  value="${placeOfBirth}"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="coordinates" style="width: 100%;">
+                  И введите географические координаты:
+                </label>
+                <input
+                  className="form-control"
+                  style="width: 100%;"
+                  name="coordinates"
+                  type="text"
+                  value="${coordinates}"
+                  required
+                />
+              </div>
+              <div class="d-flex justify-content-around">
+
+              <button data-Cancel type="button" class="btn btn-outline-danger mt-2" href="/private/admin">Отменить</button>
+              <button data-save type="submit" class="btn btn-outline-warning mt-2" >Сохранить</button>
+              </div>
+            </form>
+          </div>
+          `;
     bigTeaBox.innerHTML = template;
   }
 
   const editCard = document.querySelector(".card.card-body.edit");
-  console.log("editCard", editCard);
 
-  editCard.addEventListener("click", async (e) => {
+  editCard?.addEventListener("click", async (e) => {
     const updateForm = document.querySelector("#updForm");
     const id = e.target.closest(".card.content").id;
     const name = updateForm.name.value;
@@ -144,7 +155,7 @@ container.addEventListener("click", async (e) => {
                       Запись редактирована:
                       <b>${new Date().toTimeString()}</b>
                     </small>
-                    <div className="d-flex justify-content-around mt-2">
+                    <div class="d-flex justify-content-around mt-2">
                       <button
                         type="button"
                         class="btn btn-outline-success"
@@ -182,13 +193,11 @@ container.addEventListener("click", async (e) => {
       } catch (err) {
         console.log("err", err);
       }
-    } else if (e.target.textContent === "Отменить") {
-      const bigTeaBox = e.target.closest(".card.card-body.edit");
-      console.log("bigTeaBox", bigTeaBox);
-
-      const editCard = document.querySelector(".card.card-body.edit");
-      editCard.innerHTML = oldData;
     }
+    // else if (e.target.textContent === "Отменить") {
+    //   const editCard = document.querySelector(".card.card-body.edit");
+    //   editCard.innerHTML = oldData;
+    // }
   });
 });
 
@@ -203,6 +212,12 @@ newAdminBtn.addEventListener("click", async (e) => {
   target.style.display = "block";
   setTimeout(() => {
     target.style.display = "none";
+  }, 3000);
+
+  const collapse = document.querySelector(".mb-4.collapse");
+
+  setTimeout(() => {
+    collapse.classList.toggle("show");
   }, 3000);
 
   let response;
@@ -306,9 +321,8 @@ addNewTea.addEventListener("submit", async (e) => {
           </div>
 `;
     container.insertAdjacentHTML("beforeend", template);
-    const collapse = document.querySelector(".mb-4.collapse");
-    collapse.classList.remove('show')
-    console.log('collapse', collapse)
+    const collapse = document.querySelector(".mb-4.second.collapse");
+    collapse.classList.toggle("show");
   } catch (err) {
     console.log("err", err);
   }

@@ -11,7 +11,7 @@ function Teas({ title, username }) {
       <link rel="stylesheet" href="/css/stylemap.css"></link>
       <script defer src="/js/teas.js"></script>
       <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"></script>
-      <div id="map" className="map" style={{borderRadius: "15px", width: "100%"}}></div>
+      <div id="map" class="map" className="map" style={{borderRadius: "15px"}}></div>
 
       </div>
     </Layout>
