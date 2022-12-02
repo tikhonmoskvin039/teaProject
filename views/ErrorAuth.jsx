@@ -1,7 +1,7 @@
 const React = require("react");
 const Layout = require("./Layout");
 
-function ErrAuth({ username }) {
+function ErrorAuth({ username }) {
   //JS Code
   return (
     <Layout username={username}>
@@ -43,4 +43,4 @@ function ErrAuth({ username }) {
   );
 }
 
-module.exports = ErrAuth;
+module.exports = ErrorAuth;
