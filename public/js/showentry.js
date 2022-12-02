@@ -52,7 +52,7 @@ addButton?.addEventListener('click', async (event) => {
           </div>
             <div>
               <p class="mb-1">${text}</p>
-            </div><button class="btn btn-outline-success btn-sm" data-change=${commentId}>изменить</button><button class="btn btn-outline-success btn-sm" data-delete=${commentId}>удалить</button></div>`)
+            </div><button class="btn btn-outline-success btn-sm m-2" data-change=${commentId}>изменить</button><button class="btn btn-outline-success btn-sm m-2" data-delete=${commentId}>удалить</button></div>`)
         }
     }
 
@@ -114,7 +114,7 @@ Boxes.addEventListener('click', async (event)=>{
               </div>
                 <div>
                   <p class="mb-1">${changeMessage}</p>
-                </div><button class="btn btn-outline-success btn-sm" data-change=${messageId}>изменить</button><button class="btn btn-outline-success btn-sm" data-delete=${messageId}>удалить</button>`
+                </div><button class="btn btn-outline-success btn-sm m-2" data-change=${messageId}>изменить</button><button class="btn btn-outline-success btn-sm m-2" data-delete=${messageId}>удалить</button>`
                }
         }
 
