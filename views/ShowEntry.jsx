@@ -34,7 +34,7 @@ function ShowEntry({ tea, id, name, isAdmin, username, commentsUsers }) {
               <br />
               <div><p class="card-text">{tea[0].info}</p></div>
               <br />
-              <div><p>Страна происхождения:<b>{tea[0].placeOfBirth}</b></p></div>
+              <div><p>Страна происхождения:<b> {tea[0].placeOfBirth}</b></p></div>
               <br />
 
               {username ? (<div id="entryButton">
