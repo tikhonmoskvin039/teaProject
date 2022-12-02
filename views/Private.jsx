@@ -16,33 +16,51 @@ function Private({ commentsArr, commentes, username = "" }) {
             style={{
               backgroundColor: "rgba(255,255,255,0.7)",
               borderRadius: "20px",
+              width: "100%",
             }}
           >
             {commentsArr ? (
               commentsArr.reverse().map((comment, index) => (
-                <div className="col-sm-6 comment-box" id={`${comment.comment_id}`} data-updtext={`${comment.text}`} data-teaname={commentes[index]["Teas.name"]} data-date={comment.time.toDateString()}>
+                <div
+                  className="comment-box"
+                  style={
+                    {
+                      maxWidth: "100%",
+                      marginBottom: "2%",
+                      backgroundColor: "rgba(255,255,255,0.7)",
+                      borderRadius: "20px",
+                      padding: "2%"
+                    }
+                  }
+                  id={`${comment.comment_id}`}
+                  data-updtext={`${comment.text}`}
+                  data-teaname={commentes[index]["Teas.name"]}
+                  data-date={comment.time.toDateString()}
+                >
                   <div>
-                  <h4 id="scrollspyHeading1">{commentes[index]["Teas.name"]}</h4>
-                  
-                  <p>{comment.time.toDateString()}</p>
+                    <h4 id="scrollspyHeading1">
+                      {commentes[index]["Teas.name"]}
+                    </h4>
 
-                  <p>{comment.text}</p>
-                  
-                  <a
-                    href="#"
-                    data-updbtn={`${comment.comment_id}`}
-                    data-updbtntext={`${comment.text}`}
-                    class="btn btn-outline-success"
-                  >
-                    Редактировать комментарий
-                  </a>
-                  <a
-                    href="#"
-                    data-delBtn={comment.comment_id}
-                    class="btn btn-outline-danger p-1"
-                  >
-                    Удалить комментарий
-                  </a>
+                    <p>{comment.time.toDateString()}</p>
+
+                    <p>{comment.text}</p>
+
+                    <button
+                      href="#"
+                      data-updbtn={`${comment.comment_id}`}
+                      data-updbtntext={`${comment.text}`}
+                      class="button btn btn-outline-success"
+                    >
+                      Редактировать комментарий
+                    </button>
+                    <button
+                      href="#"
+                      data-delBtn={comment.comment_id}
+                      class="btn btn-outline-danger"
+                    >
+                      Удалить комментарий
+                    </button>
                   </div>
                 </div>
               ))

@@ -98,6 +98,9 @@ body {
   font-size: 30px;
 }
 
+.button {
+  margin-right: 10%;
+}
 
 @media (max-width: 1200px) {
   .dataIcon {
