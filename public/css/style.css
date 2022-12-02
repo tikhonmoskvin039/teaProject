@@ -60,6 +60,13 @@ body {
 
 }
 
+.private_box {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  flex-wrap: wrap;
+}
+
 .dataIcon {
   width: 85px;
   height: 85px;
