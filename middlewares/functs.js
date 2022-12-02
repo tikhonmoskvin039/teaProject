@@ -1,11 +1,17 @@
 const render = require("../lib/render");
 
 const AuthError = require("../views/ErrorAuth");
+const MapAuth = require("../views/MapAuth");
 
 exports.isAuth = (req, res, next) => {
   if (req.session?.user) next();
   // else res.redirect("/auth/signin");
   else render(AuthError, {}, res);
+};
+
+exports.isAuthMap = (req, res, next) => {
+  if (req.session?.user) next();
+  else render(MapAuth, {}, res);
 };
 
 exports.isAdmin = (req, res, next) => {
