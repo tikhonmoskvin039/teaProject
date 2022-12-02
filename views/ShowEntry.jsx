@@ -59,7 +59,8 @@ function ShowEntry({ tea, id, name, isAdmin, username, commentsUsers }) {
                     </div>
                       <div>
                         <p class="mb-1">{el['Users.Comment.text']}</p>
-                      </div>{(el['Users.id'] == id) ? (<button class="btn btn-outline-success btn-sm m-2" data-change={commentsUsers[i].commentId}>изменить</button>):('')}{(el['Users.id'] == id) ? (<button  class="btn btn-outline-success btn-sm m-2" data-delete={commentsUsers[i ++].commentId}>удалить</button>):('')}</div>)
+                      </div>
+                      {(el['Users.id'] == id) ? (<button class="btn btn-outline-success btn-sm m-2" data-change={commentsUsers[i].commentId}>изменить</button>):('')}{(el['Users.id'] == id) ? (<button  class="btn btn-outline-success btn-sm m-2" data-delete={commentsUsers[i ++].commentId}>удалить</button>):('')}</div>)
                   })}
 
 

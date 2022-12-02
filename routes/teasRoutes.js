@@ -1,6 +1,8 @@
 const express = require('express');
 const route = express.Router();
 
+const { isAuthMap } = require("../middlewares/functs"); 
+
 const render = require('../lib/render');
 const ShowEntry = require('../views/ShowEntry');
 const { Tea, Comment, User } = require('../db/models')
@@ -16,12 +18,25 @@ route.get('/all', async (req, res) => {
   res.json({ teaList })
 })
 
-route.get('/:id', async (req, res) => {
-  const { id, name, isAdmin } = req?.session?.user
-  const teaId = req.params.id
-  const tea = await Tea.findAll({ where: { id: teaId }, include: [{ model: User }], raw: true })
-  let comments = await Comment.findAll({ where: { tea_id: teaId, user_id: id }, attributes: { include: [`id`] }, order: [['user_id', 'ASC']], raw: true })
-  let commentsUsers = await Tea.findAll({ where: { id: teaId }, include: { model: User, where: { id: id } }, raw: true })
+route.get("/:id", isAuthMap, async (req, res) => {
+  const { id, name, isAdmin } = req?.session?.user;
+  const teaId = req.params.id;
+  const tea = await Tea.findAll({
+    where: { id: teaId },
+    include: [{ model: User }],
+    raw: true,
+  });
+  let comments = await Comment.findAll({
+    where: { tea_id: teaId, user_id: id },
+    attributes: { include: [`id`] },
+    order: [["user_id", "ASC"]],
+    raw: true,
+  });
+  let commentsUsers = await Tea.findAll({
+    where: { id: teaId },
+    include: { model: User, where: { id: id } },
+    raw: true,
+  });
   // if(isAdmin){
   //   comments = await Comment.findAll({ where :{ tea_id: teaId }, attributes: { include: [`id`] }, order:[['user_id', 'ASC']], raw: true })
   //   commentsUsers = await Tea.findAll({ where: { id: teaId}, include: { model: User }, raw: true })
@@ -30,12 +45,16 @@ route.get('/:id', async (req, res) => {
   // console.log(comments)
   // console.log(commentsUsers)
   commentsUsers.forEach((el, index) => {
-    el.commentId = comments[index].id
-  })
+    el.commentId = comments[index].id;
+  });
   // console.log(commentsUsers)
-  tea.sort((a, b) => b["Users.Comment.updatedAt"].getTime() - a["Users.Comment.updatedAt"].getTime())
-  render(ShowEntry, { tea, id, name, isAdmin, commentsUsers }, res)
-})
+  tea.sort(
+    (a, b) =>
+      b["Users.Comment.updatedAt"].getTime() -
+      a["Users.Comment.updatedAt"].getTime()
+  );
+  render(ShowEntry, { tea, id, name, isAdmin, commentsUsers }, res);
+});
 
 
 route.post('/:id', async (req, res) => {
