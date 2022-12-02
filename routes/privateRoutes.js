@@ -3,10 +3,10 @@ const route = express.Router();
 
 const render = require("../lib/render");
 const Private = require("../views/Private");
-
+const {isAuth} = require("../middlewares/functs");
 const { User, Tea, Comment } = require("../db/models");
 
-route.get('/', async (req, res) => {
+route.get('/',isAuth, async (req, res) => {
     const user_id = req?.session?.user?.id
     try {
         const ame = await User.findOne({ where: { id: user_id }, raw: true });

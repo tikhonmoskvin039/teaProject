@@ -202,7 +202,60 @@ container.addEventListener("click", async (e) => {
     }
     else if (e.target.textContent === "Отменить") {
       const editCard = document.querySelector(".card.card-body.edit");
-      editCard.innerHTML = oldData;
+      editCard.innerHTML = `
+      <div
+          class="card content mb-3"
+          style={{
+            maxWidth: "100%",
+            borderRadius: "20px",
+          }}
+          id="${id}"
+        >
+          <div class="row">
+            <div class="col-md-4">
+              <img
+                src="${picture_url}"
+                class="allImages img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${name}</h5>
+                <p class="card-text">${info}</p>
+                <p class="card-text">
+                  <p>
+                    Место происхождения: <b>${placeOfBirth}</b>
+                  </p>
+                  <p>
+                    Географические координаты: <b>${coordinates}</b>
+                  </p>
+                  <small class="text-muted">
+                    Запись создана: <b>${new Date().toTimeString()}</b>
+                  </small>
+                  <hr />
+                  <small class="text-muted">
+                    Запись редактирована:
+                    <b>${new Date().toTimeString()}</b>
+                  </small>
+                  <div class="d-flex justify-content-around mt-2">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      data-updateBtn="${id}"
+                    >Редактировать</button>
+                    <button
+                      type="submit"
+                      data-delBtn="${id}"
+                      class="btn btn-outline-danger"
+                    >Удалить</button>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    `;
     }
   });
 });
