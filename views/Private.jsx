@@ -3,7 +3,7 @@ const React = require("react");
 const Layout = require("./Layout");
 
 function Private({ commentsArr, commentes, username = "" }) {
-  console.log(commentsArr)
+  //console.log(commentsArr)
   return (
     <Layout username={username}>
       <script defer src="/js/private.js"></script>
@@ -20,14 +20,18 @@ function Private({ commentsArr, commentes, username = "" }) {
           >
             {commentsArr ? (
               commentsArr.reverse().map((comment, index) => (
-                <div className="col-sm-6 comment-box">
-                  <h4 id="scrollspyHeading1">{commentes.reverse()[index]["Teas.name"]}</h4>
+                <div className="col-sm-6 comment-box" id={`${comment.comment_id}`} data-updtext={`${comment.text}`} data-teaname={commentes[index]["Teas.name"]} data-date={comment.time.toDateString()}>
+                  <div>
+                  <h4 id="scrollspyHeading1">{commentes[index]["Teas.name"]}</h4>
+                  
                   <p>{comment.time.toDateString()}</p>
 
                   <p>{comment.text}</p>
+                  
                   <a
                     href="#"
-                    data-updBtn={`${comment.comment_id},${comment.text}`}
+                    data-updbtn={`${comment.comment_id}`}
+                    data-updbtntext={`${comment.text}`}
                     class="btn btn-outline-success"
                   >
                     Редактировать комментарий
@@ -35,10 +39,11 @@ function Private({ commentsArr, commentes, username = "" }) {
                   <a
                     href="#"
                     data-delBtn={comment.comment_id}
-                    class="btn btn-outline-danger"
+                    class="btn btn-outline-danger p-1"
                   >
                     Удалить комментарий
                   </a>
+                  </div>
                 </div>
               ))
             ) : (

@@ -14,7 +14,7 @@ route.get('/', async (req, res) => {
         const comments = await Comment.findAll({
             attributes: { include: ['id'] }
         })
-         console.log("chai-----", comments)
+        //console.log("chai-----", comments)
         // console.log("chai-----", commentes)
         const commentsArr = []
         comments.map((el) => {
@@ -40,7 +40,7 @@ route.delete('/del', async (req, res) => {
     // console.log("coment.......", comment_id)
     try {
         const delResp = await Comment.destroy({ where: { id: comment_id } })
-       // console.log("del.resp", delResp)
+        // console.log("del.resp", delResp)
         res.json({ delResp })
     } catch (error) {
         res.json(error);
@@ -50,14 +50,19 @@ route.delete('/del', async (req, res) => {
 
 route.put("/upd", async (req, res) => {
     try {
-      const { comment_id, newText } = req.body;
-      const updateComment = await Comment.findOne({ where: { id: comment_id } });
-      updateComment.text = newText;
-      updateComment.save();
-      res.json({ updateComment })
-    //   res.redirect("/private");
+        const { comment_id, text } = req.body;
+        //console.log({ comment_id, text })
+        const updateComment = await Comment.update({ text },
+            { where: { id: comment_id } }, { raw: true });
+       // console.log(updateComment)
+        
+        const newComment = await Comment.findOne({ where: { id: comment_id } , raw: true })
+        //   res.redirect("/private");
+        //console.log(newComment)
+        res.json(newComment)
+
     } catch (err) {
-      console.error(err);
+        console.error(err);
     }
-  });
+});
 module.exports = route;

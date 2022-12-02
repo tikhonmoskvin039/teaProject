@@ -1,15 +1,10 @@
 const privateDelBtns = document.querySelectorAll('[data-delBtn]');
-const privateUpdBtns = document.querySelectorAll('[data-updBtn]');
-
-//console.log('private----------',privateDelBtns)
+const commentBox = document.querySelector('.private_box')
 
 privateDelBtns?.forEach((btn) => {
     btn.addEventListener('click', async (event) => {
-        // console.log(event)
         event.target.closest('.col-sm-6').remove();
-        // console.log(event.target.closest('.col-sm-6'))
         const comment_id = event.target.getAttribute('data-delBtn');
-        //console.log(comment_id)
         const response = await fetch('/private/del', {
             method: 'DELETE',
             headers: {
@@ -34,61 +29,94 @@ privateDelBtns?.forEach((btn) => {
 
 
 
-privateUpdBtns?.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
+commentBox.addEventListener('click', async (event) => {
 
-        //  const comm = event;
-        const arr = event.target.getAttribute('data-updBtn');
-        const [comment_id, comment_text] = arr?.split(",")
-        // const comment_id = info[0]
-        // const comment_text = info[1]
-        console.log(arr)
-        console.log("hhh", comment_id)
-        console.log("hhh", comment_text)
-        console.log(event.target.parentNode)
+    console.log(event.target.parentNode.parentNode.id)
+    const comment_id = event.target.parentNode.parentNode.id;
 
-       // const commentBox = document.querySelector('.comment-box');
-       
+
+    if (event.target.dataset.updbtn) {
+
+        let text = ""
+        if (event.target.parentNode.parentNode.className !== "col-sm-6 comment-box") {
+            text = event.target.parentNode.getAttribute('data-updtext');
+            console.log(event.target.parentNode)
+        }
+        else {
+            console.log("------------", event.target.parentNode)
+            text = event.target.parentNode.parentNode.getAttribute('data-updtext');
+        }
+        console.log(event.target.parentNode.parentNode)
+        console.log(text)
         event.target.parentNode.innerHTML =
             `
-        <div class="mb-3">
-        <form data-new="">
+        
+        <form data-new=""        
+        data-updbtn=${comment_id}
+        data-updbtntext=${text}>
         <label  name="text" type="text" class="form-label"> комментарий:</label>
-        <textarea  class="form-control input" id="text_input" rows="3"></textarea>
+        <textarea  class="form-control input" id="text_input" rows="3">${text}</textarea>
         </br>
         <button
+
         class="btn btn-outline-success"
          id="inputText" >редактировать</button>
         </form>
-        </div>
         
-        `
-      //  const updNewBtn = document.querySelector('[data-new]');
-        document.querySelector('[data-new]')?.addEventListener('submit', (event) => {
-
-            event.preventDefault()
-            document.querySelector('[data-new]').value
-            console.log(event.target.dataset.new)
-            console.log(event.target.childNodes)
-            // const updated_comment = btn.getAttribute('data-new').valueOf
-            // console.log(updated_comment)
         
-        })
+        `}
 
 
-        // const response = await fetch('/private/upd', {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=utf-8',
-        //     },
-        //     body: JSON.stringify({
-        //         comment_id: comment_id,
-        //         text: text
-        //     })
-        // });
-        // const delInfo = await response.json();
-        // console.log("del.info", delInfo)
-    });
-})
+    if (event.target.id === "inputText") {
+        const box = event.target.closest('div').parentNode
+        let text = event.target.closest("div").parentNode.querySelector(".form-control").value
+        const comment_id = event.target.closest("div").parentNode.id
+        const tea = event.target.closest("div").parentNode.dataset.teaname
+        console.log(comment_id)
+        console.log(text)
+        console.log(box)
 
+
+        const response = await fetch('/private/upd', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({
+                comment_id: comment_id,
+                text: text
+            })
+        });
+        const updInfo = await response.json();
+        console.log("updinfo", updInfo)
+        const { tea_id, updatedAt } = updInfo
+
+        if (updInfo) {
+
+            event.target.closest("div").parentNode.dataset.updtext = updInfo.text
+            //console.log(data)
+            console.log(box)
+            box.innerHTML = `
+            <h4 id="scrollspyHeading1">${tea}</h4>
+            <p>${new Date(updatedAt).toDateString()}</p>
+
+            <p>${updInfo.text}</p>
+            <a
+              href="#"
+              data-updbtn=${comment_id}
+              class="btn btn-outline-success"
+            >
+              Редактировать комментарий
+            </a>
+            <a
+              href="#"
+              data-delBtn=${comment_id}
+              class="btn btn-outline-danger p-1"
+            >
+              Удалить комментарий
+            </a>
+            `
+        }
+    }
+});
 
