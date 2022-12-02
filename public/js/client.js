@@ -7,7 +7,7 @@ container.addEventListener("click", async (e) => {
   if (e.target.textContent === "Удалить") {
     const id = e.target.closest(".card").id;
 
-    // e.target?.closest(".card.card-body.edit").remove();
+    e.target?.closest(".card.card-body.edit")?.remove();
     e.target.closest(".card.content.mb-3").remove();
 
     let response;
@@ -28,12 +28,18 @@ container.addEventListener("click", async (e) => {
   } else if (e.target.textContent === "Редактировать") {
     console.log(e.target.closest(".card"))
     const bigTeaBox = e.target.closest(".card");
-    const pictureURL = e.target.closest(".card")?.querySelector(".allImages")?.src || "";
+    console.log('bigTeaBox', bigTeaBox)
+
+    const pictureURL =
+      e.target.closest(".card")?.querySelector(".img-fluid")?.src || "";
     const name = e.target.closest(".card")?.querySelector(".card-title")?.innerText || "";
     const info = e.target.closest(".card")?.querySelector(".card-text")?.innerText || "";
     const placeOfBirth = e.target.closest(".card")?.querySelector("b")?.innerText || "";
+
     const coordinates =
-    e.target.closest(".card")?.querySelector('[name="coordinates"]')?.innerText || "";
+      e.target.closest(".card")?.querySelector(".coordinates")?.innerText || "";
+    console.log('coordinates', coordinates)
+
     const template = `
    <div class="card card-body edit">
             <form id="updform">
@@ -66,7 +72,7 @@ container.addEventListener("click", async (e) => {
                   type="text"
                   style="width: 100%;"
                   >
-                  "${info}"
+                  ${info}
                   </textarea>
                       </div>
               <div className="form-group">
@@ -292,7 +298,7 @@ addNewTea.addEventListener("submit", async (e) => {
                       Место происхождения: <b>${data.create.placeOfBirth}</b>
                     </p>
                     <p>
-                      Географические координаты: <b>${data.create.coordinates}</b>
+                      Географические координаты: <b class="coordinates">${data.create.coordinates}</b>
                     </p>
                     <small class="text-muted">
                       Запись создана: <b>${data.create.createdAt}</b>
