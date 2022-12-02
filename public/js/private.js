@@ -38,7 +38,7 @@ commentBox.addEventListener('click', async (event) => {
     if (event.target.dataset.updbtn) {
 
         let text = ""
-        if (event.target.parentNode.parentNode.className !== "col-sm-6 comment-box") {
+        if (event.target.parentNode.parentNode.className !== "comment-box") {
             text = event.target.parentNode.getAttribute('data-updtext');
             console.log(event.target.parentNode)
         }
@@ -51,7 +51,8 @@ commentBox.addEventListener('click', async (event) => {
         event.target.parentNode.innerHTML =
             `
         
-        <form data-new=""        
+        <form data-new="" 
+        class="upd-comment"      
         data-updbtn=${comment_id}
         data-updbtntext=${text}>
         <label  name="text" type="text" class="form-label"> комментарий:</label>
